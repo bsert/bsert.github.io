@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobil Akademi - Gizlilik Politikası</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: auto; color: #333; }
+        h1 { color: #2c3e50; }
+        h2 { color: #34495e; margin-top: 25px; }
+    </style>
+</head>
+<body>
+    <h1>Gizlilik Politikası</h1>
+    <p>Son Güncelleme: 17 Mayıs 2024</p>
+    
+    <p><strong>Mobil Akademi</strong> ("biz", "uygulama"), kullanıcılarımızın gizliliğine önem vermektedir. Bu politika, uygulamamızı kullandığınızda toplanan veriler ve bunların nasıl kullanıldığı hakkında bilgi verir.</p>
+
+    <h2>1. Toplanan Veriler</h2>
+    <ul>
+        <li><strong>Hesap Bilgileri:</strong> Google Sign-In kullanıldığında adınız, e-posta adresiniz ve profil resminiz Firebase Authentication aracılığıyla saklanır.</li>
+        <li><strong>İçerik Verileri:</strong> Uygulama içinde çözdüğünüz sınavlar, aldığınız puanlar ve yüklediğiniz içerikler Firebase Firestore ve Cloudinary üzerinde saklanır.</li>
+        <li><strong>Cihaz Bilgileri:</strong> Hata takibi (Firebase Crashlytics) ve uygulama performansı için cihaz modeli ve işletim sistemi sürümü gibi anonim veriler toplanabilir.</li>
+    </ul>
+
+    <h2>2. Üçüncü Taraf Servisler</h2>
+    <p>Uygulamamız aşağıdaki üçüncü taraf hizmetleri kullanmaktadır:</p>
+    <ul>
+        <li><a href="https://policies.google.com/privacy">Google Play Hizmetleri</a></li>
+        <li><a href="https://firebase.google.com/support/privacy">Firebase (Auth, Firestore, Cloudinary, Messaging, Crashlytics)</a></li>
+        <li><a href="https://support.google.com/admob/answer/6128543">AdMob (Reklam Hizmetleri)</a></li>
+        <li><a href="https://cloudinary.com/privacy">Cloudinary (Medya Yönetimi)</a></li>
+    </ul>
+
+    <h2>3. Veri Güvenliği</h2>
+    <p>Verileriniz güvenli sunucularda saklanmakta ve yetkisiz erişime karşı Firebase güvenlik kuralları (App Check vb.) ile korunmaktadır.</p>
+
+    <h2>4. Kullanıcı Hakları</h2>
+    <p>Kullanıcılar, uygulama üzerinden hesaplarını silme veya verilerinin temizlenmesini talep etme hakkına sahiptir. Sorularınız için bizimle iletişime geçebilirsiniz.</p>
+
+    <h2>5. İletişim</h2>
+    <p>Gizlilik politikası ile ilgili sorularınız için: <strong>[E-POSTA ADRESİNİ BURAYA YAZ]</strong></p>
+</body>
+</html>
