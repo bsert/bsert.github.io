@@ -1,113 +1,137 @@
 <!DOCTYPE html>
 <html lang="tr">
-<head>
-    <meta charset="UTF-8">
+<head>    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gizlilik Politikası - Miya Mobil Akademi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f4f7f6;
+            background-color: #f4f7f9;
+            margin: 0;
+            padding: 0;
         }
         .container {
-            background-color: #fff;
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
             padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        header {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            text-align: center;
         }
         h1 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
+            color: #1a73e8;
+            margin-bottom: 10px;
+            font-size: 28px;
         }
-        h3 {
-            color: #2980b9;
-            margin-top: 25px;
+        .last-update {
+            color: #777;
+            font-size: 14px;
+        }
+        h2 {
+            color: #1a73e8;
+            font-size: 20px;
+            margin-top: 30px;
+            border-left: 4px solid #1a73e8;
+            padding-left: 15px;
+        }
+        p, li {
+            font-size: 16px;
+            color: #555;
         }
         ul {
             padding-left: 20px;
         }
-        li {
-            margin-bottom: 10px;
+        .info-box {
+            background-color: #e8f0fe;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 1px solid #d2e3fc;
         }
-        .footer {
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #7f8c8d;
+        footer {
+            margin-top: 50px;
             text-align: center;
+            font-size: 14px;
+            color: #999;
             border-top: 1px solid #eee;
             padding-top: 20px;
         }
-        a {
-            color: #3498db;
+        .contact-link {
+            color: #1a73e8;
             text-decoration: none;
+            font-weight: 600;
         }
-        a:hover {
-            text-decoration: underline;
-        }
-        .contact-box {
-            background-color: #e8f4fd;
-            padding: 15px;
-            border-left: 5px solid #3498db;
-            margin-top: 20px;
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Gizlilik Politikası</h1>
-    <p><strong>Son Güncelleme:</strong> 1 Nisan 2026</p>
+    <header>
+        <h1>Miya Mobil Akademi: KPSS GYS</h1>
+        <p style="font-weight: 600; color: #555;">Gizlilik Politikası</p>
+        <p class="last-update">Son Güncelleme: 1 Nisan 2026</p>
+    </header>
 
-    <p><strong>Miya Mobil Akademi: KPSS GYS</strong> ("biz", "uygulama"), kullanıcılarımızın gizliliğini korumayı ve şeffaflık sağlamayı taahhüt eder. Bu Gizlilik Politikası, uygulamamızı kullandığınızda hangi verilerin toplandığını, nasıl kullanıldığını ve haklarınızı açıklar.</p>
+    <p>Miya Mobil Akademi: KPSS GYS ("biz", "uygulama"), kullanıcılarımızın gizliliğini korumayı ve şeffaflık sağlamayı taahhüt eder. Bu Gizlilik Politikası, uygulamamızı kullandığınızda hangi verilerin toplandığını, nasıl kullanıldığını ve haklarınızı açıklar. Bu politika, Türkiye Cumhuriyeti <strong>6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK)</strong> ile tam uyumlu olarak hazırlanmıştır.</p>
 
-    <h3>1. Toplanan Veriler ve Kullanım Amaçları</h3>
-    <p>Uygulamamız, hizmet kalitesini artırmak ve size kişiselleştirilmiş bir deneyim sunmak için aşağıdaki verileri toplar:</p>
+    <h2>1. Toplanan Veriler ve Kullanım Amaçları</h2>
+    <p>Uygulamamız, hizmet kalitesini artırmak ve size kişiselleştirilmiş bir eğitim deneyimi sunmak için aşağıdaki verileri toplar:</p>
     <ul>
-        <li><strong>Kimlik ve Hesap Bilgileri:</strong> Google ile Giriş (Google Sign-In) yapıldığında; adınız, soyadınız, e-posta adresiniz ve profil resminiz <strong>Firebase Authentication</strong> aracılığıyla kimlik doğrulama amacıyla saklanır.</li>
-        <li><strong>Uygulama İçi Etkinlikler:</strong> Çözülen sınavlar, test sonuçları, kazanılan başarı rozetleri (Badges) ve sıralama bilgileriniz, gelişim takibiniz için <strong>Firebase Firestore</strong> üzerinde depolanır.</li>
-        <li><strong>Medya Dosyaları:</strong> Kullanıcı tarafından yüklenen içerikler veya profil resimleri <strong>Cloudinary</strong> veya <strong>Firebase Storage</strong> altyapısında güvenle barındırılır.</li>
-        <li><strong>Teknik Veriler:</strong> Uygulama hatalarını gidermek ve performansı artırmak amacıyla cihaz modeli, işletim sistemi sürümü ve hata günlükleri <strong>Firebase Crashlytics</strong> tarafından anonim olarak toplanır.</li>
+        <li><strong>Kimlik ve Hesap Bilgileri:</strong> Google ile Giriş yapıldığında; adınız, soyadınız, e-posta adresiniz ve profil resminiz Firebase Authentication aracılığıyla kimlik doğrulama amacıyla saklanır.</li>
+        <li><strong>Uygulama İçi Etkinlikler:</strong> Çözülen sınavlar, test sonuçları, kazanılan başarı rozetleri ve sıralama bilgileriniz, gelişim takibiniz için Firebase Firestore üzerinde depolanır.</li>
+        <li><strong>Medya Dosyaları:</strong> Kullanıcı tarafından yüklenen profil resimleri Cloudinary veya Firebase Storage altyapısında güvenle barındırılır.</li>
+        <li><strong>Teknik Veriler:</strong> Uygulama hatalarını gidermek için cihaz modeli ve hata günlükleri Firebase Crashlytics tarafından anonim olarak toplanır.</li>
     </ul>
 
-    <h3>2. Üçüncü Taraf Hizmet Sağlayıcıları</h3>
+    <h2>2. Üçüncü Taraf Hizmet Sağlayıcıları</h2>
     <p>Uygulama, işlevselliğini sağlamak için güvenilir üçüncü taraf servisleri kullanmaktadır. Bu servislerin kendi gizlilik politikaları geçerlidir:</p>
     <ul>
-        <li><a href="https://www.google.com/policies/privacy/" target="_blank">Google Play Hizmetleri</a></li>
-        <li><a href="https://firebase.google.com/support/privacy" target="_blank">Firebase (Auth, Firestore, Analytics, Crashlytics)</a></li>
-        <li><a href="https://support.google.com/admob/answer/6128543" target="_blank">AdMob (Reklam Hizmetleri)</a></li>
-        <li><a href="https://cloudinary.com/privacy" target="_blank">Cloudinary (Medya Yönetimi)</a></li>
+        <li>Google Play Hizmetleri</li>
+        <li>Firebase (Auth, Firestore, Analytics, Crashlytics)</li>
+        <li>AdMob (Reklam Hizmetleri)</li>
+        <li>Cloudinary (Medya Yönetimi)</li>
     </ul>
 
-    <h3>3. Veri Güvenliği</h3>
-    <p>Kullanıcı verileri, modern şifreleme yöntemleri ve <strong>Firebase Security Rules</strong> (Güvenlik Kuralları) ile korunmaktadır. Yetkisiz erişimi engellemek için endüstri standardı olan altyapılar kullanılmaktadır.</p>
+    <h2>3. Veri Güvenliği</h2>
+    <p>Kullanıcı verileri, modern şifreleme yöntemleri ve Firebase Security Rules (Güvenlik Kuralları) ile korunmaktadır. Yetkisiz erişimi engellemek için endüstri standardı olan altyapılar kullanılmaktadır.</p>
 
-    <h3>4. Reklam ve Analiz</h3>
-    <p>Uygulamamızda size ücretsiz içerik sunabilmek adına <strong>AdMob</strong> reklamları gösterilmektedir. Bu servis, ilgi alanınıza yönelik reklamlar sunmak için reklam kimliğinizi (Advertising ID) kullanabilir.</p>
+    <h2>4. Reklam ve Analiz</h2>
+    <p>Uygulamamızda size ücretsiz içerik sunabilmek adına AdMob reklamları gösterilmektedir. Bu servis, ilgi alanınıza yönelik reklamlar sunmak için reklam kimliğinizi (Advertising ID) kullanabilir.</p>
 
-    <h3>5. Veri Silme ve Kullanıcı Hakları</h3>
-    <p>Kullanıcılarımız istedikleri zaman;</p>
-    <ul>
-        <li>Uygulama ayarları üzerinden hesaplarını ve ilişkili tüm verilerini kalıcı olarak silebilirler.</li>
-        <li>Verilerinin bir kopyasını talep edebilirler.</li>
-        <li>Hesap silme talepleri için uygulama içi seçenekleri kullanabilir veya doğrudan destek e-postamız üzerinden bize ulaşabilirler.</li>
-    </ul>
+    <h2>5. Çocukların Gizliliği</h2>
+    <p>Uygulamamız 13 yaş altı çocukları hedeflememektedir ve bilerek bu yaş grubundan kişisel veri toplamamaktadır. Eğer bir çocuğun bize veri sunduğunu fark ederseniz, bu verileri derhal silmemiz için bizimle iletişime geçebilirsiniz.</p>
 
-    <div class="contact-box">
-        <h3>6. İletişim ve Veri Silme Talepleri</h3>
-        <p>Bu gizlilik politikası hakkında sorularınız veya veri silme talepleriniz için bizimle iletişime geçebilirsiniz:</p>
-        <p><strong>E-posta:</strong> <a href="mailto:miyasystems@gmail.com">miyasystems@gmail.com</a></p>
+    <h2>6. Veri Silme ve Kullanıcı Hakları</h2>
+    <p>Kullanıcılarımız istedikleri zaman uygulama ayarları üzerinden hesaplarını ve ilişkili tüm verilerini kalıcı olarak silebilirler. Veri silme işlemi gerçekleştiğinde tüm sınav geçmişiniz ve profil bilgileriniz geri döndürülemez şekilde sistemden kaldırılır.</p>
+
+    <h2>7. Politika Değişiklikleri</h2>
+    <p>Bu gizlilik politikasını zaman zaman güncelleyebiliriz. Önemli bir değişiklik olduğunda uygulama üzerinden veya bu sayfadaki "Son Güncelleme" tarihini değiştirerek sizi bilgilendireceğiz.</p>
+
+    <div class="info-box">
+        <p style="margin-top: 0; font-weight: 700; color: #1a73e8;">İletişim ve Veri Silme Talepleri</p>
+        <p>Gizlilik politikası hakkında sorularınız veya manuel veri silme talepleriniz için bize ulaşın:</p>
+        <p><strong>E-posta:</strong> <a href="mailto:miyasystems@gmail.com" class="contact-link">miyasystems@gmail.com</a></p>
         <p><strong>Geliştirici:</strong> Miya Systems</p>
     </div>
 
-    <div class="footer">
-        <p>&copy; 2026 Miya Mobil Akademi. Tüm hakları saklıdır.</p>
-    </div>
+    <footer>
+        <p>© 2026 Miya Mobil Akademi. Tüm hakları saklıdır.</p>
+    </footer>
 </div>
 
 </body>
