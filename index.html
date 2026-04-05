@@ -8,136 +8,98 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .app-card { transition: all 0.3s ease; }
-        .app-card:hover { transform: translateY(-5px); }
-        /* Özel MIYA logolu Navbar stili */
-        .miya-logo-font { font-family: 'Montserrat', sans-serif; /* Gerçek logo fontu daha iyidir, Inter ile devam ediyorum */ }
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .glass-effect { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
     </style>
 </head>
-<body class="bg-white antialiased text-slate-800">
+<body class="bg-white antialiased text-slate-900">
 
-    <nav class="bg-white py-6 px-6 sticky top-0 z-50 border-b border-slate-100">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="#" class="flex items-center gap-4">
-                <img src="miya_systems_logo.png" alt="MIYA Systems Logo" class="h-10">
+    <nav class="fixed w-full z-50 top-0 glass-effect border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <img src="logo.png" alt="MIYA Systems Logo" class="h-10 w-auto object-contain">
             </a>
-            <div class="hidden md:flex space-x-10 text-xs font-semibold uppercase tracking-widest text-slate-600">
+            
+            <div class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest text-slate-500">
                 <a href="#apps" class="hover:text-blue-600 transition">Uygulamalar</a>
                 <a href="#legal" class="hover:text-blue-600 transition">Yasal</a>
-                <a href="mailto:miyasystems@gmail.com" class="hover:text-blue-600 transition text-blue-600">İletişim</a>
+                <a href="mailto:miyasystems@gmail.com" class="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition">İletişim</a>
             </div>
         </div>
     </nav>
 
-    <section class="bg-white text-slate-900 pt-28 pb-36 px-6 relative">
-        <div class="max-w-6xl mx-auto text-center">
-            <h1 class="text-6xl md:text-8xl font-extrabold mb-10 leading-[1.1] tracking-tighter">
-                Geleceği <span class="text-blue-600">Kodluyoruz</span>
-            </h1>
-            <p class="text-xl md:text-2xl text-slate-600 mb-16 max-w-3xl mx-auto font-light leading-relaxed">
-                MIYA Systems, modern teknoloji ve kullanıcı deneyimini birleştirerek hayatı kolaylaştıran dijital çözümler sunar.
-            </p>
-            <img src="miya_systems_logo.png" alt="MIYA Systems Logo" class="mx-auto h-20 opacity-30">
-        </div>
-    </section>
-
-    <section id="apps" class="py-28 px-6 bg-slate-50">
-        <div class="max-w-7xl mx-auto">
-            <div class="mb-20 text-center">
-                <h2 class="text-5xl font-extrabold text-slate-950 mb-4 tracking-tight">Uygulamalarımız</h2>
-                <p class="text-slate-600 font-medium text-lg">Milyonlara ulaşan çözümlerimizle tanışın.</p>
-            </div>
-
-            <div class="grid grid-cols-1 gap-20">
-                <div class="bg-white rounded-[2rem] border border-slate-100 overflow-hidden flex flex-col md:flex-row app-card p-10 md:p-14 gap-12 items-center">
-                    
-                    <div class="md:w-1/3 text-center md:text-left">
-                        <i class="fas fa-graduation-cap text-9xl mb-8 text-blue-600 opacity-90"></i>
-                        <h3 class="text-4xl font-extrabold tracking-tighter italic text-slate-950">Mobil Akademi</h3>
-                    </div>
-
-                    <div class="md:w-2/3 flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
-                        <div class="flex-1">
-                            <div class="flex items-center space-x-3 mb-5">
-                                <span class="bg-blue-50 text-blue-600 text-[11px] font-bold uppercase px-4 py-1.5 rounded-lg tracking-wider">Eğitim & Sınav</span>
-                            </div>
-                            <h4 class="text-2xl font-bold text-slate-900 mb-8 leading-tight">KPSS, GYS ve Görevde Yükselme Sınavlarına Eksiksiz Hazırlanın</h4>
-                            
-                            <div class="grid md:grid-cols-2 gap-5 mb-12">
-                                <div class="flex items-center text-slate-600 text-sm font-light">
-                                    <i class="fas fa-circle text-blue-300 mr-3 text-[8px]"></i> Akıllı Deneme Laboratuvarı
-                                </div>
-                                <div class="flex items-center text-slate-600 text-sm font-light">
-                                    <i class="fas fa-circle text-blue-300 mr-3 text-[8px]"></i> Pomodoro Odaklanma Modu
-                                </div>
-                                <div class="flex items-center text-slate-600 text-sm font-light">
-                                    <i class="fas fa-circle text-blue-300 mr-3 text-[8px]"></i> Gelişmiş Başarı Analizi
-                                </div>
-                                <div class="flex items-center text-slate-600 text-sm font-light">
-                                    <i class="fas fa-circle text-blue-300 mr-3 text-[8px]"></i> Güncel Mevzuat Soru Bankası
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col gap-4 items-center md:items-end border-l border-slate-100 pl-10">
-                            <a href="#" class="bg-slate-950 text-white px-10 py-4 rounded-full font-semibold hover:bg-slate-800 transition flex items-center shadow-lg text-sm gap-3">
-                                <i class="fab fa-google-play"></i> Play Store'da Gör
-                            </a>
-                            <a href="https://bsert.github.io/mobilakademigizliliksozlesmesi.html" target="_blank" class="text-blue-600 font-semibold text-xs hover:underline flex items-center gap-2">
-                                <i class="fas fa-user-shield text-[11px]"></i> Gizlilik Sözleşmesi
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer id="legal" class="bg-slate-950 text-slate-300 py-24 px-6 border-t border-slate-900">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-4 gap-16 mb-20 items-start">
-                <div class="col-span-1 md:col-span-1 flex flex-col gap-5">
-                    <img src="miya_systems_logo.png" alt="MIYA Systems Logo" class="h-10 self-start opacity-70">
-                    <p class="text-slate-500 text-sm font-light leading-relaxed">
-                        Miya Systems olarak, her yaştan ve her seviyeden öğrencinin potansiyelini en üst düzeye çıkarmayı amaçlıyoruz.
-                    </p>
-                </div>
-                <div>
-                    <h4 class="text-xs font-bold uppercase tracking-widest mb-7 text-blue-400">Yasal</h4>
-                    <ul class="space-y-4 text-sm font-medium">
-                        <li>
-                            <a href="https://bsert.github.io/mobilakademigizliliksozlesmesi.html" class="hover:text-white transition flex items-center gap-2.5">
-                                <i class="fas fa-lock text-blue-700 text-[10px]"></i> Mobil Akademi Gizlilik
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://bsert.github.io/app-ads.txt" class="hover:text-white transition flex items-center gap-2.5">
-                                <i class="fas fa-file-code text-blue-700 text-[10px]"></i> app-ads.txt
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-xs font-bold uppercase tracking-widest mb-7 text-blue-400">İletişim</h4>
-                    <ul class="space-y-4 text-sm font-light">
-                        <li><i class="fas fa-envelope text-blue-600 mr-3 text-[12px]"></i> miyasystems@gmail.com</li>
-                        <li><i class="fas fa-user text-blue-600 mr-3 text-[12px]"></i> Behran Sert</li>
-                        <li><i class="fas fa-map-marker-alt text-blue-600 mr-3 text-[12px]"></i> Tarsus, Türkiye</li>
-                    </ul>
-                </div>
-                <div class="col-span-1 md:col-span-1 border-l border-slate-900 pl-10">
-                    <img src="miya_systems_logo.png" alt="MIYA Systems Logo" class="mx-auto h-20 opacity-30 block md:hidden mb-5">
-                    <h5 class="text-3xl font-extrabold tracking-tight text-white mb-2">Geleceğe geç kalma!</h5>
-                    <p class="text-sm text-slate-600 font-medium">© 2026 Miya Systems</p>
+    <section class="pt-32 pb-20 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
+            <div class="md:w-1/2 text-left">
+                <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight tracking-tighter">
+                    Geleceği <br><span class="text-blue-600">Kodluyoruz</span>
+                </h1>
+                <p class="text-xl text-slate-500 mb-10 font-light leading-relaxed">
+                    Modern teknoloji ve estetiği birleştirerek, hayatınızı kolaylaştıran dijital deneyimler tasarlıyoruz.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#apps" class="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:shadow-xl transition">Projelerimizi İncele</a>
                 </div>
             </div>
             
-            <div class="border-t border-slate-900 pt-10 text-center">
-                <p class="text-slate-600 text-[10px] font-medium tracking-widest uppercase">
-                    &copy; Tüm Hakları Saklıdır. Geliştirici Miya Systems.
+            <div class="md:w-1/2">
+                <img src="banner.jpg" alt="Mobil Akademi Tanıtım" class="w-full rounded-[2.5rem] shadow-2xl border border-slate-100">
+            </div>
+        </div>
+    </section>
+
+    <section id="apps" class="py-24 bg-slate-50 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold mb-4">Uygulamalarımız</h2>
+                <div class="h-1 w-20 bg-blue-600 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="bg-white rounded-[3rem] p-8 md:p-12 shadow-sm border border-slate-100 flex flex-col md:flex-row items-center gap-12 group hover:shadow-md transition">
+                <div class="w-24 h-24 bg-blue-50 rounded-3xl flex items-center justify-center text-blue-600 text-4xl">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-3xl font-bold mb-4">Mobil Akademi</h3>
+                    <p class="text-slate-600 mb-6 leading-relaxed">KPSS ve GYS sınav hazırlık sürecinizi dijitalleştiriyoruz. Akıllı denemeler, başarı analizleri ve güncel mevzuat ile yanınızdayız.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-slate-100 rounded-lg text-xs font-bold text-slate-600">KPSS 2026</span>
+                        <span class="px-4 py-2 bg-slate-100 rounded-lg text-xs font-bold text-slate-600">GYS Hazırlık</span>
+                    </div>
+                </div>
+                <div>
+                    <a href="#" class="inline-flex items-center gap-3 bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 transition">
+                        <i class="fab fa-google-play"></i> İncele
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="legal" class="bg-white border-t border-slate-100 py-16 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 text-sm">
+            <div>
+                <img src="logo.png" alt="MIYA Logo" class="h-8 mb-6 opacity-80">
+                <p class="text-slate-400 font-medium italic">"Geleceğe geç kalma!"</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-6 text-blue-600 uppercase tracking-widest">Yasal Bilgiler</h4>
+                <ul class="space-y-4 text-slate-500">
+                    <li><a href="https://bsert.github.io/mobilakademigizliliksozlesmesi.html" class="hover:text-blue-600 transition">Gizlilik Sözleşmesi</a></li>
+                    <li><a href="https://bsert.github.io/app-ads.txt" class="hover:text-blue-600 transition">app-ads.txt</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-6 text-blue-600 uppercase tracking-widest">İletişim</h4>
+                <p class="text-slate-500 leading-relaxed">
+                    Behran SERT<br>
+                    Mersin, Türkiye<br>
+                    miyasystems@gmail.com
                 </p>
             </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-slate-50 text-center text-slate-400 text-xs uppercase tracking-tighter">
+            &copy; 2026 MIYA Systems. Tüm Hakları Saklıdır.
         </div>
     </footer>
 
