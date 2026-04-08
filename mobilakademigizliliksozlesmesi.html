@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="tr">
-<head>    <meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gizlilik Politikası - Miya Akademi</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -50,6 +51,26 @@
         ul {
             padding-left: 20px;
         }
+        /* Yasal Uyarı ve Bilgi Kaynakları Kutusu */
+        .disclaimer-box {
+            background-color: #fff5f5;
+            border: 2px solid #ee675c;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .disclaimer-box h3 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #d93025;
+            display: flex;
+            align-items: center;
+        }
+        .sources-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ffcfcc;
+        }
         .info-box {
             background-color: #e8f0fe;
             border-radius: 8px;
@@ -89,12 +110,28 @@
 
     <p>Miya Akademi: KPSS GYS ("biz", "uygulama"), kullanıcılarımızın gizliliğini korumayı ve şeffaflık sağlamayı taahhüt eder. Bu Gizlilik Politikası, uygulamamızı kullandığınızda hangi verilerin toplandığını, nasıl kullanıldığını ve haklarınızı açıklar. Bu politika, Türkiye Cumhuriyeti <strong>6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK)</strong> ile tam uyumlu olarak hazırlanmıştır.</p>
 
+    <div class="disclaimer-box">
+        <h3>⚠️ ÖNEMLİ YASAL UYARI</h3>
+        <p><strong>Miya Akademi, herhangi bir resmi devlet kurumu (ÖSYM, MEB vb.) ile ilişkili, bu kurumlar tarafından desteklenen veya onaylanan resmi bir uygulama değildir.</strong> Bu platform, adayların sınavlara hazırlık sürecine yardımcı olmak amacıyla oluşturulmuş bağımsız bir dijital çalışma ve eğitim rehberidir.</p>
+        
+        <div class="sources-section">
+            <p style="font-weight: 700; color: #333; margin-bottom: 5px;">BİLGİ KAYNAKLARI (SOURCES OF INFORMATION):</p>
+            <p style="font-size: 14px; margin-top: 0;">Uygulamamızdaki içerikler halka açık olan aşağıdaki resmi devlet kaynaklarından derlenmiştir:</p>
+            <ul style="font-size: 14px;">
+                <li>T.C. Mevzuat Bilgi Sistemi: <a href="https://www.mevzuat.gov.tr/" target="_blank" class="contact-link">mevzuat.gov.tr</a></li>
+                <li>ÖSYM (Sınav Takvimi ve Kılavuzlar): <a href="https://www.osym.gov.tr/" target="_blank" class="contact-link">osym.gov.tr</a></li>
+                <li>T.C. Millî Eğitim Bakanlığı (MEB): <a href="https://www.meb.gov.tr/" target="_blank" class="contact-link">meb.gov.tr</a></li>
+                <li>T.C. Resmî Gazete: <a href="https://www.resmigazete.gov.tr/" target="_blank" class="contact-link">resmigazete.gov.tr</a></li>
+            </ul>
+        </div>
+    </div>
+
     <h2>1. Toplanan Veriler ve Kullanım Amaçları</h2>
     <p>Uygulamamız, hizmet kalitesini artırmak ve size kişiselleştirilmiş bir eğitim deneyimi sunmak için aşağıdaki verileri toplar:</p>
     <ul>
         <li><strong>Kimlik ve Hesap Bilgileri:</strong> Google ile Giriş yapıldığında; adınız, soyadınız, e-posta adresiniz ve profil resminiz Firebase Authentication aracılığıyla kimlik doğrulama amacıyla saklanır.</li>
-        <li><strong>Uygulama İçi Etkinlikler:</strong> Çözülen sınavlar, test sonuçları, kazanılan başarı rozetleri ve sıralama bilgileriniz, gelişim takibiniz için Firebase Firestore üzerinde depolanır.</li>
-        <li><strong>Medya Dosyaları:</strong> Kullanıcı tarafından yüklenen profil resimleri Cloudinary veya Firebase Storage altyapısında güvenle barındırılır.</li>
+        <li><strong>Uygulama İçi Etkinlikler:</strong> Çözülen sınavlar, test sonuçları, kazanılan başarı rozetleri ve sıralama bilgileriniz gelişim takibiniz için Firebase Firestore üzerinde depolanır.</li>
+        <li><strong>Medya Dosyaları:</strong> Kullanıcı tarafından yüklenen profil resimleri güvenli altyapılarda barındırılır.</li>
         <li><strong>Teknik Veriler:</strong> Uygulama hatalarını gidermek için cihaz modeli ve hata günlükleri Firebase Crashlytics tarafından anonim olarak toplanır.</li>
     </ul>
 
@@ -113,17 +150,17 @@
     <p>Uygulamamızda size ücretsiz içerik sunabilmek adına AdMob reklamları gösterilmektedir. Bu servis, ilgi alanınıza yönelik reklamlar sunmak için reklam kimliğinizi (Advertising ID) kullanabilir.</p>
 
     <h2>5. Çocukların Gizliliği</h2>
-    <p>Uygulamamız 13 yaş altı çocukları hedeflememektedir ve bilerek bu yaş grubundan kişisel veri toplamamaktadır. Eğer bir çocuğun bize veri sunduğunu fark ederseniz, bu verileri derhal silmemiz için bizimle iletişime geçebilirsiniz.</p>
+    <p>Uygulamamız 13 yaş altı çocukları hedeflememektedir ve bilerek bu yaş grubundan kişisel veri toplamamaktadır.</p>
 
     <h2>6. Veri Silme ve Kullanıcı Hakları</h2>
     <p>Kullanıcılarımız istedikleri zaman uygulama ayarları üzerinden hesaplarını ve ilişkili tüm verilerini kalıcı olarak silebilirler. Veri silme işlemi gerçekleştiğinde tüm sınav geçmişiniz ve profil bilgileriniz geri döndürülemez şekilde sistemden kaldırılır.</p>
 
     <h2>7. Politika Değişiklikleri</h2>
-    <p>Bu gizlilik politikasını zaman zaman güncelleyebiliriz. Önemli bir değişiklik olduğunda uygulama üzerinden veya bu sayfadaki "Son Güncelleme" tarihini değiştirerek sizi bilgilendireceğiz.</p>
+    <p>Bu gizlilik politikasını zaman zaman güncelleyebiliriz. Önemli bir değişiklik olduğunda uygulama üzerinden sizi bilgilendireceğiz.</p>
 
     <div class="info-box">
         <p style="margin-top: 0; font-weight: 700; color: #1a73e8;">İletişim ve Veri Silme Talepleri</p>
-        <p>Gizlilik politikası hakkında sorularınız veya manuel veri silme talepleriniz için bize ulaşın:</p>
+        <p>Sorularınız veya manuel veri silme talepleriniz için bize ulaşın:</p>
         <p><strong>E-posta:</strong> <a href="mailto:miyasystems@gmail.com" class="contact-link">miyasystems@gmail.com</a></p>
         <p><strong>Geliştirici:</strong> Miya Systems</p>
     </div>
