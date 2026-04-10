@@ -1,174 +1,303 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gizlilik Politikası - Miya Akademi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f4f7f9;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            background: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        header {
-            border-bottom: 2px solid #eee;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        h1 {
-            color: #1a73e8;
-            margin-bottom: 10px;
-            font-size: 28px;
-        }
-        .last-update {
-            color: #777;
-            font-size: 14px;
-        }
-        h2 {
-            color: #1a73e8;
-            font-size: 20px;
-            margin-top: 30px;
-            border-left: 4px solid #1a73e8;
-            padding-left: 15px;
-        }
-        p, li {
-            font-size: 16px;
-            color: #555;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        /* Yasal Uyarı ve Bilgi Kaynakları Kutusu */
-        .disclaimer-box {
-            background-color: #fff5f5;
-            border: 2px solid #ee675c;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .disclaimer-box h3 {
-            margin-top: 0;
-            font-size: 18px;
-            color: #d93025;
-            display: flex;
-            align-items: center;
-        }
-        .sources-section {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #ffcfcc;
-        }
-        .info-box {
-            background-color: #e8f0fe;
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 30px;
-            border: 1px solid #d2e3fc;
-        }
-        footer {
-            margin-top: 50px;
-            text-align: center;
-            font-size: 14px;
-            color: #999;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
-        }
-        .contact-link {
-            color: #1a73e8;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        @media (max-width: 600px) {
-            .container {
-                margin: 10px;
-                padding: 20px;
-            }
-        }
-    </style>
+<!-- Playables SDK -->
+<script>// Playables SDK v1.0.0
+// Game lifecycle bridge: rAF-based game-ready detection + event communication
+(function() {
+  'use strict';
+
+  // Idempotency: skip if already initialized (e.g., server-side injection
+  // followed by client-side inject-javascript via the Bloks webview component).
+  if (window.playablesSDK) return;
+
+  var HANDLER_NAME = 'playablesGameEventHandler';
+  var ANDROID_BRIDGE_NAME = '_MetaPlayablesBridge';
+  var RAF_FRAME_THRESHOLD = 3;
+
+  var gameReadySent = false;
+  var firstInteractionSent = false;
+  var errorSent = false;
+  var frameCount = 0;
+  var originalRAF = window.requestAnimationFrame;
+
+  // --- Transport Layer ---
+
+  function hasIOSBridge() {
+    return !!(window.webkit &&
+              window.webkit.messageHandlers &&
+              window.webkit.messageHandlers[HANDLER_NAME]);
+  }
+
+  function hasAndroidBridge() {
+    return !!(window[ANDROID_BRIDGE_NAME] &&
+              typeof window[ANDROID_BRIDGE_NAME].postEvent === 'function');
+  }
+
+  function isInIframe() {
+    return !!(window.parent && window.parent !== window);
+  }
+
+  function sendEvent(eventName, payload) {
+    var message = {
+      type: eventName,
+      payload: payload || {},
+      timestamp: Date.now()
+    };
+
+    if (hasIOSBridge()) {
+      try {
+        window.webkit.messageHandlers[HANDLER_NAME].postMessage(message);
+      } catch (e) { /* ignore */ }
+      return;
+    }
+
+    if (hasAndroidBridge()) {
+    try {
+      var p = payload || {};
+      p.__secureToken = window.__fbAndroidBridgeAuthToken || '';
+      window[ANDROID_BRIDGE_NAME].postEvent(
+        eventName,
+        JSON.stringify(p)
+      );
+    } catch (e) { /* ignore */ }
+    return;
+  }
+
+    if (isInIframe()) {
+      try {
+        window.parent.postMessage(message, '*');
+      } catch (e) { /* ignore */ }
+      return;
+    }
+  }
+
+  // --- rAF Game-Ready Detection ---
+
+  function onFrame() {
+    if (gameReadySent) return;
+
+    frameCount++;
+    if (frameCount >= RAF_FRAME_THRESHOLD) {
+      gameReadySent = true;
+      sendEvent('game_ready', {
+        frame_count: frameCount,
+        detected_at: Date.now()
+      });
+      return;
+    }
+
+    originalRAF.call(window, onFrame);
+  }
+
+  if (originalRAF) {
+    window.requestAnimationFrame = function(callback) {
+      if (!gameReadySent) {
+        return originalRAF.call(window, function(timestamp) {
+          frameCount++;
+          if (frameCount >= RAF_FRAME_THRESHOLD && !gameReadySent) {
+            gameReadySent = true;
+            sendEvent('game_ready', {
+              frame_count: frameCount,
+              detected_at: Date.now()
+            });
+          }
+          callback(timestamp);
+        });
+      }
+      return originalRAF.call(window, callback);
+    };
+  }
+
+  // --- First User Interaction Detection ---
+
+  function setupFirstInteractionDetection() {
+    var events = ['touchstart', 'mousedown', 'keydown'];
+
+    function onFirstInteraction() {
+      if (firstInteractionSent) return;
+      firstInteractionSent = true;
+      sendEvent('user_interaction_start', null);
+
+      for (var i = 0; i < events.length; i++) {
+        document.removeEventListener(events[i], onFirstInteraction, true);
+      }
+    }
+
+    for (var i = 0; i < events.length; i++) {
+      document.addEventListener(events[i], onFirstInteraction, true);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupFirstInteractionDetection);
+  } else {
+    setupFirstInteractionDetection();
+  }
+
+  // --- Auto Error Capture ---
+
+  window.addEventListener('error', function(event) {
+    if (errorSent) return;
+    errorSent = true;
+    sendEvent('error', {
+      message: event.message || 'Unknown error',
+      source: event.filename || '',
+      lineno: event.lineno || 0,
+      colno: event.colno || 0,
+      auto_captured: true
+    });
+  });
+
+  window.addEventListener('unhandledrejection', function(event) {
+    if (errorSent) return;
+    errorSent = true;
+    var reason = event.reason;
+    sendEvent('error', {
+      message: (reason instanceof Error) ? reason.message : String(reason),
+      type: 'unhandled_promise_rejection',
+      auto_captured: true
+    });
+  });
+
+  // --- Public API ---
+
+  window.playablesSDK = {
+    complete: function(score) {
+      sendEvent('game_ended', {
+        score: score,
+        completed: true
+      });
+    },
+
+    error: function(message) {
+      if (errorSent) return;
+      errorSent = true;
+      sendEvent('error', {
+        message: message || 'Unknown error',
+        auto_captured: false
+      });
+    },
+
+    sendEvent: function(eventName, payload) {
+      if (!eventName || typeof eventName !== 'string') return;
+      sendEvent(eventName, payload);
+    }
+  };
+
+  // Kick off rAF detection in case no game code calls rAF immediately
+  if (originalRAF) {
+    originalRAF.call(window, onFrame);
+  }
+})();</script>
+<script>window.Intl=window.Intl||{};Intl.t=function(s){return(Intl._locale&&Intl._locale[s])||s;};</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gizlilik Politikası - Miya Akademi</title>
+<style>
+  :root { --primary:#2563eb; --bg:#f8fafc; --card:#ffffff; --text:#1e293b; --muted:#64748b; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Inter",Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  .container{max-width:860px;margin:0 auto;padding:24px}
+  header{padding:48px 0 24px;text-align:center}
+  .logo{width:64px;height:64px;background:linear-gradient(135deg,#2563eb,#3b82f6);border-radius:16px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:24px}
+  h1{font-size:32px;font-weight:800;margin-bottom:8px}
+  .subtitle{color:var(--muted);font-size:16px}
+  .alert{background:#fff7ed;border:1px solid #fed7aa;border-left:4px solid #f97316;padding:20px;border-radius:12px;margin:32px 0}
+  .alert h3{color:#c2410c;font-size:18px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  .alert p{color:#9a3412;font-weight:500}
+  .card{background:var(--card);border-radius:16px;padding:28px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,0.05);border:1px solid #e2e8f0}
+  h2{font-size:20px;margin-bottom:12px;color:var(--text);font-weight:700}
+  p{margin-bottom:12px;color:#334155}
+  ul{margin:12px 0 12px 20px;color:#334155}
+  li{margin-bottom:8px}
+  .badge{display:inline-block;background:#eff6ff;color:#1d4ed8;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:12px}
+  footer{text-align:center;padding:40px 0;color:var(--muted);font-size:14px;border-top:1px solid #e2e8f0;margin-top:40px}
+  .date{color:var(--muted);font-size:14px;margin-top:8px}
+  @media(max-width:640px){.container{padding:16px}h1{font-size:26px}.card{padding:20px}}
+</style>
 </head>
 <body>
-
-<div class="container">
+  <div class="container">
     <header>
-        <h1>Miya Akademi: KPSS GYS</h1>
-        <p style="font-weight: 600; color: #555;">Gizlilik Politikası</p>
-        <p class="last-update">Son Güncelleme: 8 Nisan 2026</p>
+      <div class="logo">M</div>
+      <h1>Gizlilik Politikası</h1>
+      <p class="subtitle">Miya Akademi: KPSS & GYS</p>
+      <p class="date">Son güncelleme: 11 Nisan 2026</p>
     </header>
 
-    <p>Miya Akademi: KPSS GYS ("biz", "uygulama"), kullanıcılarımızın gizliliğini korumayı ve şeffaflık sağlamayı taahhüt eder. Bu Gizlilik Politikası, uygulamamızı kullandığınızda hangi verilerin toplandığını, nasıl kullanıldığını ve haklarınızı açıklar. Bu politika, Türkiye Cumhuriyeti <strong>6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK)</strong> ile tam uyumlu olarak hazırlanmıştır.</p>
-
-    <div class="disclaimer-box">
-        <h3>⚠️ ÖNEMLİ YASAL UYARI</h3>
-        <p><strong>Miya Akademi, herhangi bir resmi devlet kurumu (ÖSYM, MEB vb.) ile ilişkili, bu kurumlar tarafından desteklenen veya onaylanan resmi bir uygulama değildir.</strong> Bu platform, adayların sınavlara hazırlık sürecine yardımcı olmak amacıyla oluşturulmuş bağımsız bir dijital çalışma ve eğitim rehberidir.</p>
-        
-        <div class="sources-section">
-            <p style="font-weight: 700; color: #333; margin-bottom: 5px;">BİLGİ KAYNAKLARI (SOURCES OF INFORMATION):</p>
-            <p style="font-size: 14px; margin-top: 0;">Uygulamamızdaki içerikler halka açık olan aşağıdaki resmi devlet kaynaklarından derlenmiştir:</p>
-            <ul style="font-size: 14px;">
-                <li>T.C. Mevzuat Bilgi Sistemi: <a href="https://www.mevzuat.gov.tr/" target="_blank" class="contact-link">mevzuat.gov.tr</a></li>
-                <li>ÖSYM (Sınav Takvimi ve Kılavuzlar): <a href="https://www.osym.gov.tr/" target="_blank" class="contact-link">osym.gov.tr</a></li>
-                <li>T.C. Millî Eğitim Bakanlığı (MEB): <a href="https://www.meb.gov.tr/" target="_blank" class="contact-link">meb.gov.tr</a></li>
-                <li>T.C. Resmî Gazete: <a href="https://www.resmigazete.gov.tr/" target="_blank" class="contact-link">resmigazete.gov.tr</a></li>
-            </ul>
-        </div>
+    <div class="alert">
+      <h3>⚠️ Önemli Uyarı</h3>
+      <p><strong>Miya Akademi, ÖSYM, MEB veya herhangi bir kamu kurumu ile ilişkili değildir, bu kurumlar tarafından desteklenmez veya onaylanmaz.</strong> Uygulama, sınavlara hazırlık için bağımsız geliştiriciler tarafından oluşturulmuş eğitim amaçlı bir soru bankasıdır. KPSS, GYS ve benzeri kısaltmalar ilgili kurumların tescilli markalarıdır.</p>
     </div>
 
-    <h2>1. Toplanan Veriler ve Kullanım Amaçları</h2>
-    <p>Uygulamamız, hizmet kalitesini artırmak ve size kişiselleştirilmiş bir eğitim deneyimi sunmak için aşağıdaki verileri toplar:</p>
-    <ul>
-        <li><strong>Kimlik ve Hesap Bilgileri:</strong> Google ile Giriş yapıldığında; adınız, soyadınız, e-posta adresiniz ve profil resminiz Firebase Authentication aracılığıyla kimlik doğrulama amacıyla saklanır.</li>
-        <li><strong>Uygulama İçi Etkinlikler:</strong> Çözülen sınavlar, test sonuçları, kazanılan başarı rozetleri ve sıralama bilgileriniz gelişim takibiniz için Firebase Firestore üzerinde depolanır.</li>
-        <li><strong>Medya Dosyaları:</strong> Kullanıcı tarafından yüklenen profil resimleri güvenli altyapılarda barındırılır.</li>
-        <li><strong>Teknik Veriler:</strong> Uygulama hatalarını gidermek için cihaz modeli ve hata günlükleri Firebase Crashlytics tarafından anonim olarak toplanır.</li>
-    </ul>
+    <div class="card">
+      <span class="badge">1. Giriş</span>
+      <h2>Amacımız</h2>
+      <p>Miya Akademi olarak kullanıcı gizliliğini önemsiyoruz. Bu politika, hangi verileri topladığımızı, neden topladığımızı ve haklarınızı açıklar. Türkiye'deki kişisel verilerin korunmasına ilişkin mevzuata uygun hareket ediyoruz.</p>
+    </div>
 
-    <h2>2. Üçüncü Taraf Hizmet Sağlayıcıları</h2>
-    <p>Uygulama, işlevselliğini sağlamak için güvenilir üçüncü taraf servisleri kullanmaktadır. Bu servislerin kendi gizlilik politikaları geçerlidir:</p>
-    <ul>
+    <div class="card">
+      <span class="badge">2. Toplanan Veriler</span>
+      <h2>Ne topluyoruz?</h2>
+      <ul>
+        <li><strong>Hesap Bilgileri:</strong> Google ile giriş yaptığınızda ad, e-posta ve profil fotoğrafınız (Firebase Authentication)</li>
+        <li><strong>Öğrenme Verileri:</strong> Çözdüğünüz testler, sonuçlar, rozetler (Firebase Firestore)</li>
+        <li><strong>Teknik Veriler:</strong> Cihaz modeli, uygulama çökme raporları (Crashlytics - anonim)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="badge">3. Kullanım Amacı</span>
+      <h2>Veriler neden kullanılıyor?</h2>
+      <p>Size kişiselleştirilmiş çalışma deneyimi sunmak, ilerlemenizi kaydetmek ve uygulamayı iyileştirmek için. Verileriniz asla üçüncü taraflara satılmaz.</p>
+    </div>
+
+    <div class="card">
+      <span class="badge">4. Üçüncü Taraf Hizmetler</span>
+      <h2>Kullandığımız servisler</h2>
+      <ul>
         <li>Google Play Hizmetleri</li>
         <li>Firebase (Auth, Firestore, Analytics, Crashlytics)</li>
-        <li>AdMob (Reklam Hizmetleri)</li>
-    </ul>
+        <li>Google AdMob (reklam gösterimi)</li>
+      </ul>
+      <p>Bu servislerin kendi gizlilik politikaları geçerlidir.</p>
+    </div>
 
-    <h2>3. Veri Güvenliği</h2>
-    <p>Kullanıcı verileri, modern şifreleme yöntemleri ve Firebase Security Rules (Güvenlik Kuralları) ile korunmaktadır. Yetkisiz erişimi engellemek için endüstri standardı olan altyapılar kullanılmaktadır.</p>
+    <div class="card">
+      <span class="badge">5. Güvenlik</span>
+      <h2>Verileriniz güvende mi?</h2>
+      <p>Evet. Firebase Security Rules ve modern şifreleme ile korunur. Yetkisiz erişime karşı endüstri standartları uygulanır.</p>
+    </div>
 
-    <h2>4. Reklam ve Analiz</h2>
-    <p>Uygulamamızda size ücretsiz içerik sunabilmek adına AdMob reklamları gösterilmektedir. Bu servis, ilgi alanınıza yönelik reklamlar sunmak için reklam kimliğinizi (Advertising ID) kullanabilir.</p>
+    <div class="card">
+      <span class="badge">6. Reklamlar</span>
+      <h2>AdMob</h2>
+      <p>Ücretsiz içerik sunabilmek için reklam gösteriyoruz. AdMob, ilgi alanına dayalı reklamlar için reklam kimliğinizi kullanabilir. Ayarlardan sıfırlayabilirsiniz.</p>
+    </div>
 
-    <h2>5. Çocukların Gizliliği</h2>
-    <p>Uygulamamız 13 yaş altı çocukları hedeflememektedir ve bilerek bu yaş grubundan kişisel veri toplamamaktadır.</p>
+    <div class="card">
+      <span class="badge">7. Çocuklar</span>
+      <h2>Yaş sınırı</h2>
+      <p>Uygulama 13 yaş altı için tasarlanmamıştır ve bu yaş grubundan bilerek veri toplamayız.</p>
+    </div>
 
-    <h2>6. Veri Silme ve Kullanıcı Hakları</h2>
-    <p>Kullanıcılarımız istedikleri zaman uygulama ayarları üzerinden hesaplarını ve ilişkili tüm verilerini kalıcı olarak silebilirler. Veri silme işlemi gerçekleştiğinde tüm sınav geçmişiniz ve profil bilgileriniz geri döndürülemez şekilde sistemden kaldırılır.</p>
+    <div class="card">
+      <span class="badge">8. Haklarınız</span>
+      <h2>Veri silme</h2>
+      <p>İstediğiniz zaman Ayarlar > Hesabı Sil bölümünden tüm verilerinizi kalıcı olarak silebilirsiniz. Silme işlemi geri alınamaz.</p>
+    </div>
 
-    <h2>7. Politika Değişiklikleri</h2>
-    <p>Bu gizlilik politikasını zaman zaman güncelleyebiliriz. Önemli bir değişiklik olduğunda uygulama üzerinden sizi bilgilendireceğiz.</p>
-
-    <div class="info-box">
-        <p style="margin-top: 0; font-weight: 700; color: #1a73e8;">İletişim ve Veri Silme Talepleri</p>
-        <p>Sorularınız veya manuel veri silme talepleriniz için bize ulaşın:</p>
-        <p><strong>E-posta:</strong> <a href="mailto:miyasystems@gmail.com" class="contact-link">miyasystems@gmail.com</a></p>
-        <p><strong>Geliştirici:</strong> Miya Systems</p>
+    <div class="card">
+      <span class="badge">9. İletişim</span>
+      <h2>Bize ulaşın</h2>
+      <p>Sorularınız için: <strong>miyasystems@gmail.com</strong></p>
+      <p>Geliştirici: Miya Systems</p>
     </div>
 
     <footer>
-        <p>© 2026 Miya Akademi. Tüm hakları saklıdır.</p>
+      © 2026 Miya Akademi - Bağımsız eğitim uygulaması
     </footer>
-</div>
-
+  </div>
 </body>
 </html>
