@@ -1,1 +1,155 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Otoyol Hız Koridoru - Gizlilik Politikası</title>
+<style>
+  :root {
+    --primary: #2D3A8C;
+    --accent: #FF7A00;
+    --bg: #F5F6FA;
+    --card: #ffffff;
+    --text: #1a1d29;
+    --muted: #6b7280;
+  }
+    * { box-sizing: border-box; margin:0; padding:0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .hero {
+    position: relative;
+    height: 280px;
+    background: url('otoyol_banner.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(20,26,70,0.75), rgba(20,26,70,0.6));
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    padding: 20px;
+  }
+  .hero h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 8px; }
+  .hero p { font-size: 1.1rem; opacity: 0.95; }
+  .container { max-width: 860px; margin: -60px auto 60px; padding: 0 20px; position: relative; z-index: 3; }
+  .info-bar {
+    background: var(--card); border-radius: 16px; padding: 16px 24px;
+    box-shadow: 0 4px 20px rgba(45,58,140,0.08);
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 24px; border-left: 4px solid var(--accent);
+  }
+  .info-bar strong { color: var(--primary); }
+  .card {
+    background: var(--card); border-radius: 20px; padding: 32px;
+    margin-bottom: 20px; box-shadow: 0 4px 20px rgba(45,58,140,0.06);
+  }
+  h2 { color: var(--primary); font-size: 1.4rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+  h2::before { content: ''; width: 6px; height: 24px; background: var(--accent); border-radius: 3px; display: inline-block; }
+  p { margin-bottom: 14px; color: #333; }
+  ul { margin: 12px 0 12px 20px; }
+  li { margin-bottom: 8px; }
+  .highlight { background: #fff7ed; border-left: 4px solid var(--accent); padding: 14px 18px; border-radius: 8px; margin: 16px 0; }
+  a { color: var(--primary); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .footer { text-align: center; color: var(--muted); font-size: 0.9rem; padding: 40px 20px; }
+  .badge { display: inline-block; background: var(--primary); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; margin-top: 10px; }
+  @media (max-width: 600px) {
+    .hero { height: 220px; } .hero h1 { font-size: 1.8rem; }
+    .card { padding: 24px; } .info-bar { flex-direction: column; align-items: flex-start; gap: 6px; }
+  }
+</style>
+</head>
+<body>
 
+<div class="hero">
+  <div class="hero-content">
+    <h1>Otoyol Hız Koridoru</h1>
+    <p>Gizlilik Politikası</p>
+    <span class="badge">Play Store için hazır</span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="info-bar">
+    <div><strong>Geliştirici:</strong> Miya Systems</div>
+    <div><strong>Son Güncelleme:</strong> 11 Nisan 2026</div>
+  </div>
+
+  <div class="card">
+    <h2>1. Giriş</h2>
+    <p>Bu Gizlilik Politikası, <strong>Miya Systems</strong> tarafından geliştirilen <strong>"Otoyol Hız Koridoru"</strong> adlı Android uygulaması için geçerlidir.</p>
+    <div class="highlight">
+      <strong>Önemli:</strong> Otoyol Hız Koridoru, Karayolları Genel Müdürlüğü (KGM), Ulaştırma ve Altyapı Bakanlığı veya herhangi bir kamu kurumu ile resmi bir bağlantısı, ortaklığı veya onayı olmayan bağımsız bir uygulamadır.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>2. Toplanan Veriler</h2>
+    <p>Uygulamamız gizliliğinize saygı duyar ve <strong>tamamen çevrimdışı</strong> çalışacak şekilde tasarlanmıştır:</p>
+    <ul>
+      <li>Ad, soyad, telefon, e-posta, konum gibi <strong>hiçbir kişisel veri toplamaz</strong>.</li>
+      <li>Güzergah seçimleriniz sadece hesaplama için cihazda kullanılır, sunucuya gönderilmez.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>3. Uygulama İzinleri</h2>
+    <ul>
+      <li><strong>INTERNET:</strong> Yalnızca Google AdMob reklamları için.</li>
+      <li><strong>ACCESS_NETWORK_STATE:</strong> Reklam yüklenebilirliği için.</li>
+      <li><strong>WAKE_LOCK:</strong> Yolculuk sayacı sırasında ekran açık kalsın diye.</li>
+    </ul>
+    <p>Uygulama konum, kamera, mikrofon izni <strong>istemez.</strong></p>
+  </div>
+
+  <div class="card">
+    <h2>4. Üçüncü Taraf Hizmetler</h2>
+    <p><strong>Google AdMob</strong> – anonim cihaz ID'si toplayabilir. <a href="https://policies.google.com/privacy" target="_blank">Google Politikası</a></p>
+  </div>
+
+  <div class="card">
+    <h2>5. Verilerin Kullanımı</h2>
+    <ul>
+      <li>Tüm otoyol verileri uygulama içine gömülüdür, kgm.gov.tr'ye bağlanmaz.</li>
+      <li>Miya Systems sunucusuna veri gönderilmez.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>6. Çocukların Gizliliği</h2>
+    <p>13 yaş altına yönelik değildir.</p>
+  </div>
+
+  <div class="card">
+    <h2>7. Sorumluluk Reddi</h2>
+    <p>Bilgiler KGM'nin kamuya açık verilerinden derlenmiştir, bilgi amaçlıdır. Trafik ve güncel tarifeler nedeniyle farklılık gösterebilir. Miya Systems doğruluk garantisi vermez.</p>
+  </div>
+
+  <div class="card">
+    <h2>8. Değişiklikler</h2>
+    <p>Politika güncellenirse bu sayfada yayınlanır.</p>
+  </div>
+
+  <div class="card">
+    <h2>9. İletişim</h2>
+    <p><strong>Geliştirici:</strong> Miya Systems<br>
+    <strong>E-posta:</strong> destek@miyasystems.com<br>
+    <strong>Uygulama:</strong> Otoyol Hız Koridoru</p>
+  </div>
+</div>
+
+<div class="footer">© 2026 Miya Systems. Tüm hakları saklıdır.</div>
+</body>
+</html>
