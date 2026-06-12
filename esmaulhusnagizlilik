@@ -1,0 +1,178 @@
+import os
+
+html_content = """<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gizlilik Politikası - Esmaül Hüsna ve Zikirmatik</title>
+    <style>
+        :root {
+            --primary-color: #4a148c;
+            --secondary-color: #7c43bd;
+            --text-color: #333333;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --border-color: #e0e0e0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 28px;
+            margin-top: 0;
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            font-size: 20px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p, li {
+            font-size: 15px;
+            color: #555;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .date {
+            font-style: italic;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .contact-info {
+            background-color: #f3e5f5;
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 30px;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+            color: #424242;
+        }
+
+        .contact-info strong {
+            color: var(--primary-color);
+        }
+
+        .project-id {
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            margin-top: 40px;
+            font-family: monospace;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px auto;
+            }
+            .card {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            h2 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <h1>Gizlilik Politikası</h1>
+        <div class="date">Son Güncelleme: 12 Haziran 2026</div>
+
+        <p><strong>Esmaül Hüsna ve Zikirmatik</strong> ("Uygulama") olarak, kullanıcılarımızın gizliliğine önem veriyoruz. Bu gizlilik politikası, uygulamamızın hangi bilgileri topladığını, nasıl kullandığını ve üçüncü taraf hizmetlerle olan ilişkisini açıklar.</p>
+
+        <h2>1. Toplanan Bilgiler ve Kullanım Amacı</h2>
+        
+        <h3>a. Konum Bilgisi</h3>
+        <p>Uygulamamız, "Namaz Vakitleri" özelliğinin doğru çalışabilmesi için cihazınızın yaklaşık veya kesin konumuna erişim izni isteyebilir. Bu konum bilgisi sadece o anki namaz vakitlerini hesaplamak için API servisimize gönderilir; tarafımızca sunucularımızda saklanmaz veya üçüncü taraflara satılmaz.</p>
+
+        <h3>b. Kullanım Verileri</h3>
+        <p>Uygulama performansını iyileştirmek ve hataları tespit etmek amacıyla; cihaz modeli, işletim sistemi sürümü ve uygulama içi etkileşimler (tıklanan butonlar vb.) gibi anonim teknik veriler toplanabilir.</p>
+
+        <h3>c. Yerel Depolama</h3>
+        <p>Zikir sayacı verileriniz, dil tercihleriniz ve seçtiğiniz konum bilgisi gibi ayarlar, cihazınızın yerel belleğinde (SharedPreferences) saklanır. Bu veriler cihazınızdan dışarı aktarılmaz.</p>
+
+        <h2>2. Üçüncü Taraf Hizmetler</h2>
+        <p>Uygulamamız, işlevselliğini sağlamak için aşağıdaki üçüncü taraf servislerini kullanmaktadır. Bu servislerin kendi gizlilik politikaları geçerlidir:</p>
+        <ul>
+            <li><strong>Google AdMob (Reklamlar):</strong> Uygulama içinde reklam göstermek için kullanılır. AdMob, kişiselleştirilmiş reklamlar sunmak için cihaz reklam kimliğini kullanabilir.</li>
+            <li><strong>Firebase Analytics (Analiz):</strong> Uygulamanın nasıl kullanıldığını anlamak ve çökme raporlarını takip etmek için kullanılır.</li>
+            <li><strong>Google Play Hizmetleri:</strong> Uygulamanın temel Android işlevleri için gereklidir.</li>
+        </ul>
+
+        <h2>3. Çerezler ve Yerel Saklama</h2>
+        <p>Uygulama, doğrudan "çerez" kullanmaz. Ancak, zikir kaldığınız yeri hatırlamak veya ayarlarınızı korumak için cihazınızın yerel depolama alanını kullanır.</p>
+
+        <h2>4. Çocukların Gizliliği</h2>
+        <p>Uygulamamız her yaş grubuna hitap etmektedir. 13 yaş altı çocuklardan bilerek kişisel veri toplamıyoruz. Eğer bir çocuğun bize kişisel bilgi verdiğini fark edersek, bu bilgileri derhal sistemimizden siliyoruz.</p>
+
+        <h2>5. Güvenlik</h2>
+        <p>Verilerinizin güvenliğini sağlamak için endüstriyel standartlarda yöntemler kullanıyoruz. Ancak, internet üzerinden iletilen veya elektronik ortamda saklanan hiçbir yöntemin %100 güvenli olmadığını hatırlatmak isteriz.</p>
+
+        <h2>6. Değişiklikler</h2>
+        <p>Bu Gizlilik Politikası zaman zaman güncellenebilir. Değişiklikleri bu sayfa üzerinden takip edebilirsiniz.</p>
+
+        <h2>7. İletişim</h2>
+        <div class="contact-info">
+            <p>Sorularınız ve geri bildirimleriniz için:</p>
+            <p>E-posta: <strong>miyasystems@gmail.com</strong></p>
+            <p>Geliştirici: <strong>Miya Systems</strong></p>
+        </div>
+
+        <div class="project-id">
+            Project ID: esma-ül-hüsna-ve-zikirmatik
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+"""
+
+with open("privacy_policy.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("HTML file successfully created.")
